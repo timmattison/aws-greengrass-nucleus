@@ -66,6 +66,12 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
 
   public static final String CREATE_LOCAL_DEPLOYMENT = SERVICE_NAMESPACE + "#CreateLocalDeployment";
 
+  public static final String DELETE_THING_SHADOW = SERVICE_NAMESPACE + "#DeleteThingShadow";
+
+  public static final String UPDATE_THING_SHADOW = SERVICE_NAMESPACE + "#UpdateThingShadow";
+
+  public static final String GET_THING_SHADOW = SERVICE_NAMESPACE + "#GetThingShadow";
+
   static {
     SERVICE_OPERATION_SET = new HashSet();
     SERVICE_OPERATION_SET.add(SUBSCRIBE_TO_IOT_CORE);
@@ -90,6 +96,9 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
     SERVICE_OPERATION_SET.add(LIST_LOCAL_DEPLOYMENTS);
     SERVICE_OPERATION_SET.add(STOP_COMPONENT);
     SERVICE_OPERATION_SET.add(CREATE_LOCAL_DEPLOYMENT);
+    SERVICE_OPERATION_SET.add(DELETE_THING_SHADOW);
+    SERVICE_OPERATION_SET.add(UPDATE_THING_SHADOW);
+    SERVICE_OPERATION_SET.add(GET_THING_SHADOW);
   }
 
   private final Map<String, Function<OperationContinuationHandlerContext, ? extends ServerConnectionContinuationHandler>> operationSupplierMap;
@@ -122,6 +131,7 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
       Function<OperationContinuationHandlerContext, GeneratedAbstractSubscribeToConfigurationUpdateOperationHandler> handler) {
     operationSupplierMap.put(SUBSCRIBE_TO_CONFIGURATION_UPDATE, handler);
   }
+
 
   public void setListComponentsHandler(
       Function<OperationContinuationHandlerContext, GeneratedAbstractListComponentsOperationHandler> handler) {
@@ -211,6 +221,21 @@ public final class GreengrassCoreIPCService extends EventStreamRPCServiceHandler
   public void setCreateLocalDeploymentHandler(
       Function<OperationContinuationHandlerContext, GeneratedAbstractCreateLocalDeploymentOperationHandler> handler) {
     operationSupplierMap.put(CREATE_LOCAL_DEPLOYMENT, handler);
+  }
+
+  public void setDeleteThingShadowHandler(
+          Function<OperationContinuationHandlerContext, GeneratedAbstractDeleteThingShadowOperationHandler> handler) {
+    operationSupplierMap.put(DELETE_THING_SHADOW, handler);
+  }
+
+  public void setUpdateThingShadowHandler(
+          Function<OperationContinuationHandlerContext, GeneratedAbstractUpdateThingShadowOperationHandler> handler) {
+    operationSupplierMap.put(UPDATE_THING_SHADOW, handler);
+  }
+
+  public void setGetThingShadowHandler(
+          Function<OperationContinuationHandlerContext, GeneratedAbstractGetThingShadowOperationHandler> handler) {
+    operationSupplierMap.put(GET_THING_SHADOW, handler);
   }
 
   @Override
